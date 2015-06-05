@@ -597,9 +597,12 @@ function postMessage(message, name) {
 Bonus
 -----
 - Ajouter des formes comme des réctangles ou des cercle
-- Sauvegarder le chat
+- Ajouter la possibilité de mettre du texte
+- Sauvegarder l'historique du chat
 - Sauvegarder le dessin
 - Ajouter des commandes dans le chats pour intéragir avec le dessin
+- Ajouter une couleur différentes à chaque utilisateur (Curseur et chat)
+- 
 
 
 Références
