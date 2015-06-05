@@ -76,7 +76,7 @@ Créer un fichier app.js à la racine du répertoire de votre application. C'est
 
 Nous allons dans un premier temps initialiser notre serveur:
 
-```
+```js
 var express = require('express'); // Recupération de la librairie express
 var app = express(); // Initialisation d'express
 var server = require('http').Server(app); // Création du serveur http
@@ -99,7 +99,7 @@ Pour éteindre le serveu, utilisez le raccourcis Ctrl + C.
 
 Nous allons donc créer une route qui va pointer vers un fichier index.html:
 
-```
+```js
 app.get('/', function (req, res) { 
   res.sendFile(__dirname + '/index.html');
 });
@@ -109,7 +109,7 @@ Notre application va aussi utiliser un certain nombre d'assets, comme nos fichie
 Nous allons donc rendre certain répertoire disponible pour pouvoir lire ces fichier statiques depuis le navigateur:
 
 Il faut donc maintenant créer un fichier index.html qui contiendra la page de notre application:
-```
+```js
 app.use('/assets', express.static('assets')); 
 app.use('/bower_components', express.static('bower_components'));
 ```
@@ -118,7 +118,7 @@ Nous avons donc rendu accéssible le répertoire assets qui va contenir nos fich
 
 Nous allons maintenant créer le fichier index.html qui va contenir notre frontend:
 
-```
+```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -174,7 +174,7 @@ Nous allons ici faire en sorte de dessiner sur notre canvas.
 
 Dans un premier temps, nous allons ajouter un peu de css dans notre feuille de style pour distinguer notre canvas:
 
-```
+```css
 #board {
   background: #eee;
 }
@@ -184,7 +184,7 @@ Le canvas doit maintenant être gris claire.
 
 Nous allons maintenant aller dans le fichier script.js pour écrire le code de l'application:
 
-```
+```js
 $(document).ready(function(){
   // Code goes here
 });
@@ -196,7 +196,7 @@ Tout le js que nous allons écrire se trouvera dans cette fonction.
 
 Maintenant que jQuery est initialisé, nous allons afficher un message pour alerter les utilisateurs qui aurait un navigateur ne supportant pas les canvas HTML5:
 
-```
+```js
 if(!('getContext' in document.createElement('canvas'))){
   alert('Your browser does not support canvas!');
   return false;
@@ -205,7 +205,7 @@ if(!('getContext' in document.createElement('canvas'))){
 
 Nous allons ensuite initialiser un certain nombre de variables qui seront utilie par la suite
 
-```
+```js
 var win = $(window),              // Récupération de l'élément window
 doc = $(document),                // Récupération de l'élément document
 canvas = $('#board'),             // Récupération de l'élément canvas
@@ -217,7 +217,7 @@ mouse = {};                       // Position de la souris
 
 Nous allons maintenant nous attacher à l'événement de la souris 'mousedown', qui est l'événement qui est lancé quand on appuis sur le bouton de la souris:
 
-```
+```js
 canvas.on('mousedown',function(e){
   // Code on mousedown event goes here
 });
@@ -225,7 +225,7 @@ canvas.on('mousedown',function(e){
 
 Dans cette fonction nous allons stoquer les coordonnées de la souris, et commencer le dessin:
 
-```
+```js
 e.preventDefault(); // Permet d'empécher le comportement par défault de l'élément
 drawing = true; // On passe drawing à true car nous sommes en train de dessiner
 
@@ -235,7 +235,7 @@ mouse.y = e.pageY - offset.top; // On stock l'ordonnée relative au canvas
 
 Nous allons maintenant nous attacher à l'événement de la souris 'mousemove', qui est l'événement qui est lancé à chaque fois que la souris bouge:
 
-```
+```js
 canevas.on('mousemove',function(e){
   // Code on mousemove event goes here
 });
@@ -243,7 +243,7 @@ canevas.on('mousemove',function(e){
 
 Dans cette fonction nous allons récupérer les coordonnées de la souris, et dessiner dans le canvas si la variable drawing est à true:
 
-```
+```js
 var x = e.pageX - offset.left;
 var y = e.pageY - offset.top;
 
@@ -257,7 +257,7 @@ if(drawing){ // On ne dessine que si on est en train de cliquer dans le canvas:
 
 Nous allons maintenant nous attacher à l'événement de la souris 'mouseup', qui est l'événement qui est lancé quand on relache le bouton de la souris, ainsi que l'événement mouseleave qui est lancé quand la souris sort de l'élément :
 
-```
+```js
 canvas.on('mouseup mouseleave', function(e){
   drawing = false; // si on relache le bouton de la souris ou qu'on sort du cadre, on arrête de dessiner
 });
@@ -265,7 +265,7 @@ canvas.on('mouseup mouseleave', function(e){
 
 Il ne nous reste plus maintenant qu'à faire la fonction qui permet de dessiner:
 
-```
+```js
 function drawLine(
   fromx, // coordonnée x de départ
   fromy, // coordonnée y de départ
@@ -289,7 +289,7 @@ Options
 Nous allons maintenant ajouter quelques options, comme par exemple la possibilité de changer la couleur ou la taille du crayon.
 Pour cela, nous allons rajouter une variable au niveau des initialisations :
 
-```
+```js
 var options = { // Options de dessin
   color: "#000000",  // Couleur en noir par défault
   size: 1           // Taille de 1 par défault
@@ -297,7 +297,7 @@ var options = { // Options de dessin
 ```
 
 Nous allons maintenant rajouter les options dans la fonction de dessin drawLine, ce qui donne:
-```
+```js
 function drawLine(
   fromx, // coordonnée x de départ
   fromy, // coordonnée y de départ
@@ -319,7 +319,7 @@ function drawLine(
 
 Il faut maitenant ajouter les options à l'appel de la fonction drawLine dans l'événement mousemove :
 
-```
+```js
 drawLine(mouse.x, mouse.y, x, y, options);
 ```
 
@@ -329,7 +329,7 @@ Nous allons maintenant laisser la possibilité à l'utilisateur de changer la co
 
 Pour cela, nous allons ajouter des champs dans la barre de droite de notre page (div avec la classe bar-right dans index.html):
 
-```
+```html
 <div class="options">
   <div>
    <label>Couleur:</label>
@@ -344,7 +344,7 @@ Pour cela, nous allons ajouter des champs dans la barre de droite de notre page 
 
 Il nous faut maintenant changer les valeurs de la variable options par les valeura des champs. Pour cela, nous allons nous relier à l'événement change de ces éléments:
 
-```
+```js
 $(".options").on('change', function(){ // Fonction exécuté lors de l'événement change de tous les éléments ayant la classe options
   options[$(this).attr('id')] = $(this).val(); // On récupére l'id de l'élément et on s'en sert comme index pour l'objet options en lui affectant à valeur
 });
@@ -361,7 +361,7 @@ Le principe est simple. Quand un utilisateur bouge la souris, on envoie au serve
 Pour cela nous allons retourner dans le fichier app.js pour ajouter la partie socket.io.
 Dans un premier temps, il faut se lier à l'événement connections des sockets :
 
-```
+```js
 io.sockets.on('connection', function (socket) {
  // Code exécuté quand un utilisateur se connecte sur le serveur
  // l'objet socket passé en paramètre est l'objet qui sert à gérer la connexion avec l'utilisateur
@@ -370,7 +370,7 @@ io.sockets.on('connection', function (socket) {
 
 Dans cet fonction, nous allons écouter l'événement "drawing" (événement custom), récupérer les informations utilisateurs et les renvoyer à tout le monde:
 
-```
+```js
 socket.on('drawing', function(data) {
   var result = { 
     data:data, // Données envoyé par les utilisateurs
@@ -383,7 +383,7 @@ socket.on('drawing', function(data) {
 Dans le client (script.js), nous allons maintenant ajouter la connexion au serveur de socket.
 Dans la partie initialisation des variables, ajouter :
 
-```
+```js
 var socket = io.connect(''); // Connexion au serveur de socket
 var clients = {}; // List des clients connectées
 var cursors = {}; // Curseurs de clients connectées
@@ -395,7 +395,7 @@ Le paremètre de la fonction connect est l'url du serveur de socket. Si on ne me
 Nous allons maintenant envoyer les coordonnées et options du mouvement de la souris au serveur de socket.
 Dans l'événement mousemove, ajouter ceci:
 
-```
+```js
 socket.emit('drawing', { // La fonction emit permet d'envoyer un événement au serveur. Le premier paramètre est le nom de l'événement, et les deuxième les données à envoyer.
   x: x,
   y: y,
@@ -411,7 +411,7 @@ Il faut maintenant récupérer les informations des autres utilisateurs.
 
 Pour cela, nous allons nous attaché à l'événement 'drawing' du serveur de socket:
 
-```
+```js
 socket.on("drawing", function(data) {
   // Récupération des données des autres utilisateurs
 });
@@ -419,7 +419,7 @@ socket.on("drawing", function(data) {
 
 Nous allons maintenant dessiner dans notre canvas ce que dessine les autres: 
 
-```
+```js
 if(data.data.drawing && clients[data.id]) { // Si le client existe et qu'il est en train de dessiner
   var c = clients[data.id];
   drawLine(c.x, c.y, data.data.x, data.data.y, c.options); 
@@ -433,7 +433,7 @@ Nous allons maintenant afficher la position de la souris des autres utilisateurs
 
 Dans l'événement drawing, rajouter le code suivant:
 
-```
+```js
 if(!(data.id in clients)) { // Si le client existe
   var cursor = $('<div class="cursor">').appendTo('#cursors'); // On creer un élément curseur
   cursor.text(data.data.name); // On ajoute le nom de l'utilisateur
@@ -448,7 +448,7 @@ cursors[data.id].css({ // Mise à jour de la position du cursor
 
 Nous allons rajouter le style du curseur:
 
-```
+```css
 .cursor {
   position: absolute;
   border: 1px solid black;
@@ -462,7 +462,7 @@ Nous allons maintenant faire une page de connexion pour choisir son nom d'utilis
 
 Dans le fichier index.html, ajouter le formulaire de connexion au début du body:
 
-```
+```html
 <div id="connection" class="popup">
   <div class="inner">
     <h2>Connection</h2>
@@ -477,7 +477,7 @@ Dans le fichier index.html, ajouter le formulaire de connexion au début du body
 
 Dans le fichier style.css, nous allons ajouter le style de la popup:
 
-```
+```css
 .popup {
   position: fixed;
   width: 100%;
@@ -509,7 +509,7 @@ Dans le fichier style.css, nous allons ajouter le style de la popup:
 
 Nous allons maintenant ajouter le code pour stoquer le nom d'utilisateur.
 
-```
+```js
 $('#connection-form').on('submit', function(e){ // On s'attache sur l'événement submit du formulaire
   e.preventDefault();  // On empèche le comportement par défault du formulaire
   $('#connection').addClass('connection-hidden'); // On ajoute la classe pour cacher le formulaire
@@ -525,7 +525,7 @@ Chat
 Nous allons maintenant ajouter un chat dans la barre de droite.
 Nous allons donc ajouter l'html nécessaire dans le fichier index.html dans la barre de droite:
 
-```
+```html
 <div class="chat">
   <div id="messages">
   </div>
@@ -537,7 +537,7 @@ Nous allons donc ajouter l'html nécessaire dans le fichier index.html dans la b
 
 Dans le fichier style.css ajouter les styles suivant: :
 
-```
+```css
 #messages {
   height: 400px;
   overflow: auto;
@@ -548,7 +548,7 @@ Dans le fichier style.css ajouter les styles suivant: :
 
 Nous allons maintenant envoyer le message au serveur :
 
-```
+```js
 $("#messages-form").on('submit', function(e){ 
   e.preventDefault();
   var message = $('#message').val(); // On récupère le message du champs texte
@@ -561,7 +561,7 @@ $("#messages-form").on('submit', function(e){
 Nous allons maintenant récupérer le message sur le serveur pour le renvoyer à tout le monde.
 Dans le fichier app.js, ajouter le code suivant:
 
-```
+```js
 socket.on('message', function(message){
   socket.broadcast.emit('message', {
     id: socket.id,
@@ -574,7 +574,7 @@ Nous allons maintenant récupérer les messages des autres utilisateurs dans le 
 Pour cela, nous allons nous attacher à l'événement 'message' du serveur.
 Dans le fichier script.js, ajouter :
 
-```
+```js
 socket.on('message', function(data) {
   var c = clients[data.id];
   postMessage(data.message, c.name);
@@ -583,7 +583,7 @@ socket.on('message', function(data) {
 
 Il ne reste plus qu'à créer la fonction postMessage qui permet d'afficher les messages dans la div message:
 
-```
+```js
 function postMessage(message, name) {
   var messageWrapper = $('<div class="message"></div>'); // On crée l'élément message
   var nameElement = $('<div class="name"></div>').text(name); // On ajoute l'élément contenant le nom de l'utilisateur
