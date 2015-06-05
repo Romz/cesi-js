@@ -28,7 +28,7 @@ npm install -g bower
 Créer le répertoire du projet (par exemple:  RealtimeCanvas).
 
 Créer un fichier package.json dans ce repertoire :
-```
+```json
 {
   "name": "RealtimeCanvas",
   "version": "0.0.1",
