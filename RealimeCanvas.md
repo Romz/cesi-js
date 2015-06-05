@@ -95,7 +95,7 @@ node app.js
 Maintenant, si on essaye d'accéder au server (via http://localhost:3000), on devrait voir apparaître le message suivant: "Cannot GET /".
 Cela indique que le serveur est bien lancé, mais qu'aucune route n'est définie.
 
-Pour éteindre le serveu, utilisez le raccourcis Ctrl + C.
+Pour éteindre le serveur, utilisez le raccourcis Ctrl + C.
 
 Nous allons donc créer une route qui va pointer vers un fichier index.html:
 
