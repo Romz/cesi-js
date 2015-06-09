@@ -602,7 +602,7 @@ Bonus
 - Sauvegarder le dessin
 - Ajouter des commandes dans le chats pour intéragir avec le dessin
 - Ajouter une couleur différentes à chaque utilisateur (Curseur et chat)
-- 
+- Streamer la webcam
 
 
 Références
