@@ -236,7 +236,7 @@ mouse.y = e.pageY - offset.top; // On stock l'ordonnée relative au canvas
 Nous allons maintenant nous attacher à l'événement de la souris 'mousemove', qui est l'événement qui est lancé à chaque fois que la souris bouge:
 
 ```js
-canevas.on('mousemove',function(e){
+canvas.on('mousemove',function(e){
   // Code on mousemove event goes here
 });
 ```
