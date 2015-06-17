@@ -14,11 +14,14 @@ Technos
 - Twitter bootstrap
 - jQuery
 - Bower
+- Mongodb & Mongoose
 
 
 Instalation et création du projet
 ---------------------------------
 Installer nodejs en allant sur ce lien: [nodejs](https://nodejs.org/)
+
+Installer MongoDB en allant sur ce lien: [MongoDB](http://docs.mongodb.org/manual/installation/)
 
 Installer bower
 ```
@@ -39,14 +42,18 @@ Créer un fichier package.json dans ce repertoire :
 ```
 
 Installer express dans le projet.
-
 ```
 npm install express --save
 ```
-Installer socket.io via npm.
 
+Installer socket.io via npm.
 ```
 npm install socket.io --save
+```
+
+Installer Mongoose 
+```
+npm install mongoose --save
 ```
 
 Initialiser bower (Génère le fichier bower.json qui gère les dépendances des différentes librairies du projet).
@@ -552,7 +559,7 @@ Nous allons maintenant envoyer le message au serveur :
 $("#messages-form").on('submit', function(e){ 
   e.preventDefault();
   var message = $('#message').val(); // On récupère le message du champs texte
-  socket.emit('message', message); // On envoi le message au serveur
+  socket.emit('message', {message: message, user: name}); // On envoi le message au serveur
   postMessage(message, name);  // On affiche le message dans la div messages
   $('#message').val(''); // On vide le champs message
 });
@@ -565,7 +572,7 @@ Dans le fichier app.js, ajouter le code suivant:
 socket.on('message', function(message){
   socket.broadcast.emit('message', {
     id: socket.id,
-    message: message
+    message: message.message
   });
 });
 ```
@@ -594,15 +601,67 @@ function postMessage(message, name) {
 }
 ```
 
+On remarque qu'à chaque rechargement de page, les messages disparaissent. Nous allons faire en sorte que les messages soient stoqués en base de donnée.
+
+Dans un premier temps, nous allons initialiser la connection à notre base de données.
+Dans le fichier app.js, nous allons importer la librairie mongoose et initialiser notre model:
+```js
+var mongoose = require('mongoose'); // Recuperation de la librairie
+mongoose.connect('mongodb://localhost/messages'); // Connexion a la base de donnees messages
+mongoose.connection.on('error', console.error.bind(console, 'connection error:')); // Si il y a une erreur lors de la connexion, on l'affiche dans la console
+
+Message = mongoose.model('Message',{user:String, message:String}); // On initialise le model Message qui comporte un nom et un message.
+```
+
+Maintenant que la connexion à la base de données est effective et que notre modèle est initialisé, nous allons maintenant passer à l'enregistremment des messages.
+
+Toujours dans le fichier app.js, dans l'événement message, nous allons pouvoir ajouter les messages dans la base:
+
+```js
+message = new Message({ // On crée notre objet Message
+  message: message.message,
+  user: message.user
+});
+message.save(function(err){ // On le sauvegarde dans la base
+  if(err)  // Si il y a une erreur
+    console.log(err); // On l'ecrit dans la console
+});
+```
+
+Voilà, tous les nouveaux messages vont maintenant etre sauvegardé en base.
+
+Il faut maintenant envoyer les messages aux utilisateurs qui viennent de se connecter.
+Pour cela, nous allons aller dans l'événement connection pour récupérer les messages et les envoyer aux utilisateurs:
+
+```js
+Message.find(function(err, messages){ // La methode find (sans options), permet de récupérer tout les messages qui sont passer dans le callback
+  socket.emit('connected', messages); // On envoi les messages à l'utilisateur qui vient de se connecter
+});
+```
+
+Il ne reste plus maintenant qu'à récupérer les messages coté client.
+
+Pour cela, nous allons nous écouter l'événement "connected", et récupérer la liste:
+
+```js
+socket.on('connected', function(messages){
+  console.log(messages);
+  for(var i = 0, j = messages.length; i < j; i++) {
+    m = messages[i];
+    postMessage(m.message, m.user);
+  }
+});
+```
+
 Bonus
 -----
+- Ajouter la possibilité de changer le texte et la couleur du texte dans le chat en stockant les options dans la DB
+- Ajouter une couleur différentes à chaque utilisateur (Curseur et chat)
 - Ajouter des formes comme des réctangles ou des cercle
-- Ajouter la possibilité de mettre du texte
-- Sauvegarder l'historique du chat
+- Ajouter la possibilité de mettre du texte sur le tableau
 - Sauvegarder le dessin
 - Ajouter des commandes dans le chats pour intéragir avec le dessin
-- Ajouter une couleur différentes à chaque utilisateur (Curseur et chat)
-- Streamer la webcam
+
 
 
 Références
