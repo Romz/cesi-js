@@ -38,12 +38,12 @@ Une fois que la base sera fini, vous allez pouvoir étendre les fonctionnalités
 Documentations
 --------------
 
-[Socket.io](http://socket.io/docs/)
-[HTML5 Drag and Drop](http://www.w3schools.com/html/html5_draganddrop.asp)
+- [Socket.io](http://socket.io/docs/)
+- [HTML5 Drag and Drop](http://www.w3schools.com/html/html5_draganddrop.asp)
 
 ## Mongoose
-[Models](http://mongoosejs.com/docs/models.html)
-[Populations](http://mongoosejs.com/docs/populate.html)
-[Queries](http://mongoosejs.com/docs/queries.html)
-[Validation](http://mongoosejs.com/docs/validation.html)
+- [Models](http://mongoosejs.com/docs/models.html)
+- [Populations](http://mongoosejs.com/docs/populate.html)
+- [Queries](http://mongoosejs.com/docs/queries.html)
+- [Validation](http://mongoosejs.com/docs/validation.html)
 
