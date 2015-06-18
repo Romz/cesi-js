@@ -30,9 +30,13 @@ Fonctionnalités bonus
 
 Une fois que la base sera fini, vous allez pouvoir étendre les fonctionnalités de vos tâche.
 
+- Ajouter une description à une tâche
 - Changer la couleur de fond de la tâche
 - Laisser des commentaires dans une tâche
 - Ajouter une checklist à une tâche
+- Ajouter une gestion simple des utilisateurs
+- Ajouter un utilisateur à une tâche
+- Ajouter un fil d'actualité avec toutes les actions qui ont été effectué
 
 
 Documentations
@@ -41,7 +45,7 @@ Documentations
 - [Socket.io](http://socket.io/docs/)
 - [HTML5 Drag and Drop](http://www.w3schools.com/html/html5_draganddrop.asp)
 
-## Mongoose
+### Mongoose
 - [Models](http://mongoosejs.com/docs/models.html)
 - [Populations](http://mongoosejs.com/docs/populate.html)
 - [Queries](http://mongoosejs.com/docs/queries.html)
