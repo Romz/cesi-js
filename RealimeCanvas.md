@@ -438,7 +438,7 @@ Vous pouvez maintenant essayer de vous connecter à plusieurs navigateurs.
 
 Nous allons maintenant afficher la position de la souris des autres utilisateurs.
 
-Dans l'événement drawing, rajouter le code suivant:
+Dans l'événement drawing, rajouter le code suivant tout en haut de la fonction:
 
 ```js
 if(!(data.id in clients)) { // Si le client existe
