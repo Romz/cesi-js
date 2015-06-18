@@ -8,7 +8,7 @@ Faire une application de dessins collaboratif à l'aide d'un canvas HTML5 et des
 Technos
 -------
 - Nodejs
-- Express
+- Expresss
 - Socket.io
 - HTML5 canvas
 - Twitter bootstrap
@@ -168,7 +168,7 @@ Dans le répertoire du projets, créer l'arborescence suivante:
 
 - assets
   - css
-    - style.css (feuille de style de l'application)
+    - styles.css (feuille de style de l'application)
   - js
     - script.js (fichier js qui va contenir le code de l'application)
 
@@ -427,7 +427,7 @@ socket.on("drawing", function(data) {
 Nous allons maintenant dessiner dans notre canvas ce que dessine les autres: 
 
 ```js
-if(data.data.drawing && clients[data.id]) { // Si le client existe et qu'il est en train de dessiner
+if(data.data.drawing && clients[data.id]) { // Si le client n'existe pas et qu'il est en train de dessiner
   var c = clients[data.id];
   drawLine(c.x, c.y, data.data.x, data.data.y, c.options); 
 }
@@ -438,7 +438,7 @@ Vous pouvez maintenant essayer de vous connecter à plusieurs navigateurs.
 
 Nous allons maintenant afficher la position de la souris des autres utilisateurs.
 
-Dans l'événement drawing, rajouter le code suivant:
+Dans l'événement drawing, rajouter le code suivant tout en haut de la fonction:
 
 ```js
 if(!(data.id in clients)) { // Si le client existe
