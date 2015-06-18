@@ -427,7 +427,7 @@ socket.on("drawing", function(data) {
 Nous allons maintenant dessiner dans notre canvas ce que dessine les autres: 
 
 ```js
-if(data.data.drawing && clients[data.id]) { // Si le client existe et qu'il est en train de dessiner
+if(data.data.drawing && clients[data.id]) { // Si le client n'existe pas et qu'il est en train de dessiner
   var c = clients[data.id];
   drawLine(c.x, c.y, data.data.x, data.data.y, c.options); 
 }
