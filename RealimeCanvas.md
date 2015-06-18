@@ -8,7 +8,7 @@ Faire une application de dessins collaboratif à l'aide d'un canvas HTML5 et des
 Technos
 -------
 - Nodejs
-- Express
+- Expresss
 - Socket.io
 - HTML5 canvas
 - Twitter bootstrap
@@ -168,7 +168,7 @@ Dans le répertoire du projets, créer l'arborescence suivante:
 
 - assets
   - css
-    - style.css (feuille de style de l'application)
+    - styles.css (feuille de style de l'application)
   - js
     - script.js (fichier js qui va contenir le code de l'application)
 
