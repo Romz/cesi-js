@@ -3,7 +3,7 @@ Task manager
 
 Explication du projet
 ---------------------
-Le but de ce projet est de créer un utilitaire qui permet une gestion collaborative de tâches et de liste via un système de post-it (inspiré de trello).
+Le but de ce projet est de créer un utilitaire qui permet une gestion collaborative de tâches et de liste via un système de post-it (inspiré de [trello](https://trello.com/)).
 
 - Vous devez utiliser socket.io pour la gestion en temps réel des changements de tâches / liste de tâche etc...
 - Les données devront être stocker dans une base de données mongoDB.
